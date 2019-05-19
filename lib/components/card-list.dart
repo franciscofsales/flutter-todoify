@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:todoify/blocs/list-bloc.dart';
+import 'package:todoify/blocs/ui-bloc.dart';
 import 'package:todoify/components/card-item.dart';
 import 'package:todoify/configs.dart';
 import 'package:todoify/models/card-item-model.dart';
 
 class CardList extends StatefulWidget {
-  final List<CardItemModel> cardsList;
+  final List<dynamic> cardsList;
   final Color color;
 
-  const CardList({List<CardItemModel> cardsList, Color color})
+  const CardList({List<dynamic> cardsList, Color color})
       : this.cardsList = cardsList,
         this.color = color;
 
@@ -25,7 +25,7 @@ class _CardListState extends State<CardList> with TickerProviderStateMixin {
   ScrollController scrollController;
   _CardListState(this.cardsList, this.color);
 
-  final List<CardItemModel> cardsList;
+  final List<dynamic> cardsList;
   final Color color;
 
   @override
@@ -57,7 +57,7 @@ class _CardListState extends State<CardList> with TickerProviderStateMixin {
                 curvedAnimation = CurvedAnimation(
                     parent: animationController, curve: Curves.fastOutSlowIn);
                 animationController.addListener(() {
-                  listBloc.setColor(colorTween.evaluate(curvedAnimation));
+                  uiBloc.setColor(colorTween.evaluate(curvedAnimation));
                 });
                 if (details.velocity.pixelsPerSecond.dx > 0) {
                   if (cardIndex > 0) {
